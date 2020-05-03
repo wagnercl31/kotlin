@@ -26,23 +26,19 @@ class MainActivity : DebugActivity() {
         //val intent = Intent(context, TelaInicialActivity::class.java)
         val valorUsuario = campoUsuario.text.toString()
         val valorSenha = campoSenha.text.toString()
-            if(valorUsuario == "aluno" && valorSenha == "1234"){
-                intent.putExtra("result", getString(R.string.login_OK))
-            }else {
-                intent.putExtra("result", getString(R.string.login_ERR))
-            }
-        val intent = Intent(context, TelaInicialActivity::class.java)
+        if(valorUsuario.equals("aluno")  && valorSenha.equals("1234") ){
+            intent.putExtra("result", getString(R.string.login_OK))
+            val intent = Intent(context, TelaInicialActivity::class.java)
+            val params = Bundle()
+            params.putString("nome", "wagner")
 
-        val params = Bundle()
-        params.putString("nome", "wagner")
+            intent.putExtras(params)
+            startActivityForResult(intent, 1)
+        }else {
+            Toast.makeText(context, R.string.login_ERR, Toast.LENGTH_LONG).show()
+        }
+//        val intent = Intent(context, TelaInicialActivity::class.java)
 
-        intent.putExtras(params)
-        params.putInt("numero", 10)
-
-
-        //startActivity(intent)
-
-        startActivityForResult(intent, 1)
     }
 
 

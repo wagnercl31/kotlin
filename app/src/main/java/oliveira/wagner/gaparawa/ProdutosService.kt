@@ -26,5 +26,21 @@ object ProdutosService {
 
         return produtos
     }
+    fun getLegumes(context: Context): List<Produtos> {
+        val produtos = mutableListOf<Produtos>()
+        for (i in 1..10) {
+            val v = Produtos()
+            v.nome = "Legumes $i"
+            v.categoria = "1 $i"
+            v.foto =
+                "https://static.portaldacidade.com/unsafe/1150x767/https://s3.amazonaws.com/painel-do-franqueado/img/news/2017-11/sacolao-tera-produtos-naturais-por-preco-abaixo-do-mercado-em-umuarama-5a1098b122f2e.jpg"
+            produtos.add(v)
+        }
+
+
+        return produtos
+    }
+
+
 
 }

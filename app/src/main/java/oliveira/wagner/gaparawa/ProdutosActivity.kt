@@ -1,6 +1,5 @@
 package oliveira.wagner.gaparawa
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_produtos.*
@@ -14,7 +13,8 @@ class ProdutosActivity : DebugActivity() {
         setContentView(R.layout.activity_produtos)
 
         //recuperar onjeto de Produto da Intent
-        produto = intent.getSerializableExtra("produto") as Produtos
+        produto = intent.getSerializableExtra("produto") as? Produtos
+
 
         //configurar título com nome do produto e botão de voltar da toolbar
         //colocar toolbar
@@ -28,7 +28,8 @@ class ProdutosActivity : DebugActivity() {
 
         //atualizar dados do carro
         nomeProduto.text = produto?.nome
-        Picasso.with(this).load(produto?.foto).fit().into(imagemProduto, object: com.squareup.picasso.Callback{
+        Picasso.with(this).load(produto?.foto).fit().into(imagemProduto,
+            object: com.squareup.picasso.Callback{
             override fun onSuccess() { }
 
             override fun onError() {  }

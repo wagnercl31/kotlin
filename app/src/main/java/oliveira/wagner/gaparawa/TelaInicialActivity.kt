@@ -35,11 +35,6 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 //        val numero = intent.getIntExtra("nome", 0)
 
 
-
-        Toast.makeText(context, "oi: $nome", Toast.LENGTH_LONG).show()
-//        Toast.makeText(context, "numero: $numero", Toast.LENGTH_LONG).show()
-
-
         setSupportActionBar(toolbar)
 
         supportActionBar?.title = "Compras"
@@ -66,9 +61,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     }
 
     fun onclickProduto(produto: Produtos) {
-        Toast.makeText(context, "clicou em ${produto.nome}", Toast.LENGTH_LONG).show()
         val intent = Intent(context, ProdutosActivity::class.java)
-        intent.putExtra("Produto", produto)
+        intent.putExtra("produto", produto)
         startActivity(intent)
     }
 
@@ -147,6 +141,10 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             R.id.nav_fale_conosco -> {
                 Toast.makeText(this, "clicou em fale conosco", Toast.LENGTH_SHORT).show()
             }
+            R.id.nav_logout -> {
+               this.onClickLogout()
+            }
+
         }
         layoutMenuLateral.closeDrawer(GravityCompat.START) //volta pro inicio após clicar em algum item
         return true
