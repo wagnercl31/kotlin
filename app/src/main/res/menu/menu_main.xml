@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_buscar"
+        android:title="Buscar"
+        android:icon="@drawable/ic_buscar_white"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/action_atualizar"
+        android:title="Atualizar"
+        android:icon="@drawable/ic_atualizar_white"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_config"
+        android:title="Configurações"
+        app:showAsAction="never"
+        />
+</menu>

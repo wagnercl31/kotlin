@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">gaparawa</string>
+    <string name="str_msg_login">Faça aqui seu acesso</string>
+    <string name="login">Login</string>
+    <string name="passwd">Senha</string>
+    <string name="enter">Entrar</string>
+
+    <string name="login_OK">Logado</string>
+    <string name="login_ERR">Sem autorização</string>
+    <string name="nav_open">Abrir</string>
+    <string name="nav_close">Fechar</string>
+
+</resources>
