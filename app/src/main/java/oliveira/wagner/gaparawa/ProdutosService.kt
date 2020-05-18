@@ -1,46 +1,93 @@
 package oliveira.wagner.gaparawa
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 object ProdutosService {
+    val host = "https://rafaelsdlima.pythonanywhere.com"
+    val TAG = "WS_LMSApp"
 
     fun getProdutos(context: Context): List<Produtos> {
-        val produtos = mutableListOf<Produtos>()
-            val v = Produtos()
-            v.nome = "Verduras"
-            v.categoria = "1"
-            v.foto = "https://static.portaldacidade.com/unsafe/1150x767/https://s3.amazonaws.com/painel-do-franqueado/img/news/2017-11/sacolao-tera-produtos-naturais-por-preco-abaixo-do-mercado-em-umuarama-5a1098b122f2e.jpg"
-            produtos.add(v)
-
-            val f = Produtos()
-            f.nome = "Frutas"
-            f.categoria = "2"
-            f.foto = "https://s2.glbimg.com/7inpIUNcR9cTFdKl4Ib-lEZBToM=/0x0:724x483/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2019/05/15/frutas_variadas_nao_engordam.jpg"
-            produtos.add(f)
-
-            val l = Produtos()
-            l.nome = "Legumes"
-            l.categoria = "3"
-            l.foto = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhMVkW8js6ob8BlI_6oSoH5jIaM9auy5Yx3cgrNkDYYH4ckv--&usqp=CAU"
-            produtos.add(l)
-
-        return produtos
-    }
-    fun getLegumes(context: Context): List<Produtos> {
-        val produtos = mutableListOf<Produtos>()
-        for (i in 1..10) {
-            val v = Produtos()
-            v.nome = "Legumes $i"
-            v.categoria = "1 $i"
-            v.foto =
-                "https://static.portaldacidade.com/unsafe/1150x767/https://s3.amazonaws.com/painel-do-franqueado/img/news/2017-11/sacolao-tera-produtos-naturais-por-preco-abaixo-do-mercado-em-umuarama-5a1098b122f2e.jpg"
-            produtos.add(v)
+        var produtos: ArrayList<Produtos>
+        if (AndroidUtils.isInternetDisponivel()) {
+            val url = "$host/produtos"
+            val json = HttpHelper.get(url)
+            produtos = parserJson(json)
+            // salvar offline
+            for (a in produtos) {
+                saveOffline(a)
+            }
+            return produtos
+        } else {
+            val dao = DatabaseManager.getProdutosDAO()
+            val produtos = dao.findAll()
+            return produtos
         }
 
-
-        return produtos
     }
 
+    fun getProdutos (context: Context, id: Long): Produtos? {
 
+        if (AndroidUtils.isInternetDisponivel()) {
+            val url = "$host/produtos/${id}"
+            val json = HttpHelper.get(url)
+            val produtos = parserJson<Produtos>(json)
 
+            return produtos
+        } else {
+            val dao = DatabaseManager.getProdutosDAO()
+            val produtos = dao.getById(id)
+            return produtos
+        }
+
+    }
+
+    fun save(produtos: Produtos): Response {
+        if (AndroidUtils.isInternetDisponivel()) {
+            val json = HttpHelper.post("$host/produtos", produtos.toJson())
+            return parserJson(json)
+        }else {
+            saveOffline(produtos)
+            return Response("OK", "Produtos salvo no dispositivo")
+        }
+    }
+
+    fun saveOffline(produtos: Produtos): Boolean {
+        val dao = DatabaseManager.getProdutosDAO()
+
+        if (!existeProdutos(produtos)) {
+            dao.insert(produtos)
+        }
+
+        return true
+
+    }
+
+    fun existeProdutos(produtos: Produtos): Boolean {
+        val dao = DatabaseManager.getProdutosDAO()
+        return dao.getById(produtos.id) != null
+    }
+
+    fun delete(produtos: Produtos): Response {
+        if (AndroidUtils.isInternetDisponivel()) {
+            val url = "$host/produtos/${produtos.id}"
+            val json = HttpHelper.delete(url)
+
+            return parserJson(json)
+        } else {
+            val dao = DatabaseManager.getProdutosDAO()
+            dao.delete(produtos)
+            return Response(status = "OK", msg = "Dados salvos localmente")
+        }
+
+    }
+
+    inline fun <reified T> parserJson(json: String): T {
+        val type = object : TypeToken<T>(){}.type
+        return Gson().fromJson<T>(json, type)
+    }
 }
+
