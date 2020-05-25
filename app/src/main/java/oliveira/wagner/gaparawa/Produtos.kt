@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
+@Entity(tableName = "produtos")
 class Produtos : Serializable {
     var id:Long = 0
     var nome:String = ""

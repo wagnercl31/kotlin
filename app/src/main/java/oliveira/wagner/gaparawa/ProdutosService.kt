@@ -10,16 +10,17 @@ object ProdutosService {
     val host = "https://rafaelsdlima.pythonanywhere.com"
     val TAG = "WS_LMSApp"
 
-    fun getProdutos(context: Context): List<Produtos> {
-        var produtos: ArrayList<Produtos>
+    fun getProdutos (context: Context): List<Produtos> {
+        var produtos = ArrayList<Produtos>()
         if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/produtos"
             val json = HttpHelper.get(url)
             produtos = parserJson(json)
             // salvar offline
-            for (a in produtos) {
-                saveOffline(a)
+            for (d in produtos) {
+                saveOffline(d)
             }
+            Log.d(TAG, json)
             return produtos
         } else {
             val dao = DatabaseManager.getProdutosDAO()
@@ -49,16 +50,17 @@ object ProdutosService {
         if (AndroidUtils.isInternetDisponivel()) {
             val json = HttpHelper.post("$host/produtos", produtos.toJson())
             return parserJson(json)
-        }else {
+        }
+        else {
             saveOffline(produtos)
-            return Response("OK", "Produtos salvo no dispositivo")
+            return Response("OK", "Produto salvo no dispositivo")
         }
     }
 
-    fun saveOffline(produtos: Produtos): Boolean {
+    fun saveOffline(produtos: Produtos) : Boolean {
         val dao = DatabaseManager.getProdutosDAO()
 
-        if (!existeProdutos(produtos)) {
+        if (! existeProduto(produtos)) {
             dao.insert(produtos)
         }
 
@@ -66,7 +68,7 @@ object ProdutosService {
 
     }
 
-    fun existeProdutos(produtos: Produtos): Boolean {
+    fun existeProduto(produtos: Produtos): Boolean {
         val dao = DatabaseManager.getProdutosDAO()
         return dao.getById(produtos.id) != null
     }
@@ -90,4 +92,3 @@ object ProdutosService {
         return Gson().fromJson<T>(json, type)
     }
 }
-
