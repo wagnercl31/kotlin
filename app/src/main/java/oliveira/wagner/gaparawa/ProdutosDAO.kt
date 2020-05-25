@@ -12,7 +12,7 @@ interface ProdutosDAO {
     fun getById(id: Long): Produtos?
 
     @Query("SELECT * FROM produtos")
-    fun findAll(): List<Produtos>
+    fun findAll(): List<    Produtos>
 
     @Insert
     fun insert(produtos: Produtos)

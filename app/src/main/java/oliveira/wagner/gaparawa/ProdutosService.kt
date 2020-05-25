@@ -2,11 +2,11 @@ package oliveira.wagner.gaparawa
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 object ProdutosService {
+
     val host = "https://rafaelsdlima.pythonanywhere.com"
     val TAG = "WS_LMSApp"
 
@@ -20,6 +20,7 @@ object ProdutosService {
             for (a in produtos) {
                 saveOffline(a)
             }
+            Log.d(TAG, json)
             return produtos
         } else {
             val dao = DatabaseManager.getProdutosDAO()
@@ -29,14 +30,13 @@ object ProdutosService {
 
     }
 
-    fun getProdutos (context: Context, id: Long): Produtos? {
+    fun getProduto(context: Context, id: Long): Produtos? {
 
         if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/produtos/${id}"
             val json = HttpHelper.get(url)
-            val produtos = parserJson<Produtos>(json)
 
-            return produtos
+            return parserJson<Produtos>(json)
         } else {
             val dao = DatabaseManager.getProdutosDAO()
             val produtos = dao.getById(id)
@@ -55,7 +55,7 @@ object ProdutosService {
         }
     }
 
-    fun saveOffline(produtos: Produtos): Boolean {
+    private fun saveOffline(produtos: Produtos): Boolean {
         val dao = DatabaseManager.getProdutosDAO()
 
         if (!existeProdutos(produtos)) {
@@ -66,21 +66,21 @@ object ProdutosService {
 
     }
 
-    fun existeProdutos(produtos: Produtos): Boolean {
+    private fun existeProdutos(produtos: Produtos): Boolean {
         val dao = DatabaseManager.getProdutosDAO()
         return dao.getById(produtos.id) != null
     }
 
     fun delete(produtos: Produtos): Response {
-        if (AndroidUtils.isInternetDisponivel()) {
+        return if (AndroidUtils.isInternetDisponivel()) {
             val url = "$host/produtos/${produtos.id}"
             val json = HttpHelper.delete(url)
 
-            return parserJson(json)
+            parserJson(json)
         } else {
             val dao = DatabaseManager.getProdutosDAO()
             dao.delete(produtos)
-            return Response(status = "OK", msg = "Dados salvos localmente")
+            Response(status = "OK", msg = "Dados salvos localmente")
         }
 
     }

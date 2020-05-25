@@ -23,9 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".DebugActivity" />
-        <activity android:name=".ProdutosActivity"
+        <activity
+            android:name=".ProdutosActivity"
             android:theme="@style/AppTheme.Toolbar"
-            android:parentActivityName=".TelaInicialActivity"></activity>
+            android:parentActivityName=".TelaInicialActivity" />
         <activity
             android:name=".TelaInicialActivity"
             android:theme="@style/AppTheme.Toolbar" />
