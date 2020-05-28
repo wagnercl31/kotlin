@@ -4,6 +4,7 @@
     <string name="login">Login</string>
     <string name="passwd">Senha</string>
     <string name="enter">Entrar</string>
+    <string name="action_remover">Remover</string>
 
     <string name="login_OK">Logado</string>
     <string name="login_ERR">Sem autorização</string>

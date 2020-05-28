@@ -26,7 +26,7 @@ class MainActivity : DebugActivity() {
         //val intent = Intent(context, TelaInicialActivity::class.java)
         val valorUsuario = campoUsuario.text.toString()
         val valorSenha = campoSenha.text.toString()
-        if(valorUsuario.equals("aluno")  && valorSenha.equals("1234") ){
+        if(valorUsuario.equals("aluno")  && valorSenha.equals("impacta") ){
             intent.putExtra("result", getString(R.string.login_OK))
             val intent = Intent(context, TelaInicialActivity::class.java)
             val params = Bundle()

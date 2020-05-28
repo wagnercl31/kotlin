@@ -10,10 +10,10 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class ProdutoAdapter (
+class ProdutosAdapter (
     val produtos: List<Produtos>,
     val onClick: (Produtos) -> Unit
-):RecyclerView.Adapter<ProdutoAdapter.ProdutosViewHolder>() {
+):RecyclerView.Adapter<ProdutosAdapter.ProdutosViewHolder>() {
 
     class ProdutosViewHolder(view: View): RecyclerView.ViewHolder(view){
         val cardNome: TextView

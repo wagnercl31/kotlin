@@ -4,12 +4,12 @@ import androidx.room.Room
 
 object DatabaseManager {
 
-    private var dbInstace: ProdutosDatabase
+    private var dbInstace: ProdutoDatabase
 
     init{
         val appContext = ProdutosAplication.getInstance().applicationContext
         dbInstace = Room.databaseBuilder(
-            appContext, ProdutosDatabase::class.java, "gprw.sqlite"
+            appContext, ProdutoDatabase::class.java, "gprw.sqlite"
         ).build()
     }
 
