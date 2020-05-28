@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.login.*
 
+
 class MainActivity : DebugActivity() {
 
     private val context: Context get() = this
