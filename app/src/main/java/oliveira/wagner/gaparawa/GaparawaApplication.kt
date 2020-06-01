@@ -2,7 +2,7 @@ package oliveira.wagner.gaparawa
 
 import android.app.Application
 
-class ProdutosAplication: Application(){
+class GaparawaApplication: Application(){
 
     override fun onCreate() {
         super.onCreate()
@@ -10,9 +10,9 @@ class ProdutosAplication: Application(){
     }
 
     companion object {
-        private var appInstance: ProdutosAplication? = null
+        private var appInstance: GaparawaApplication? = null
 
-        fun getInstance(): ProdutosAplication {
+        fun getInstance(): GaparawaApplication {
             if (appInstance == null) {
                 throw IllegalStateException("Configurar application no Android Manifest")
             }

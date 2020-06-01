@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class ProdutoAdapter (
-    val produtos: List<Produtos>,
-    val onClick: (Produtos) -> Unit
+    val produtos: List<Produto>,
+    val onClick: (Produto) -> Unit
 ):RecyclerView.Adapter<ProdutoAdapter.ProdutosViewHolder>() {
 
     class ProdutosViewHolder(view: View): RecyclerView.ViewHolder(view){

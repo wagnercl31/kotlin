@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "785625772768",
+    "firebase_url": "https://drled-app.firebaseio.com",
+    "project_id": "drled-app",
+    "storage_bucket": "drled-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785625772768:android:2bece3f44f50f02e981685",
+        "android_client_info": {
+          "package_name": "oliveira.wagner.gaparawa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785625772768-epqob8is1nm3k33k12m63k58eukmk52j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9njQ4U8Smo99BW0eYwt_Szfueh3kK4wg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785625772768-epqob8is1nm3k33k12m63k58eukmk52j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

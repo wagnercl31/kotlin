@@ -16,7 +16,7 @@ class MainActivity : DebugActivity() {
         setContentView(R.layout.login) //conteudo da view
 
         imageLogin.setImageResource(R.drawable.imagem_login) // colocar imagem no imageLogin
-        mensagemInicial.text = getString(R.string.str_msg_login)
+        mensagemInicial.text = getString(R.string.mensagem_login)
 
         buttonLogin.setOnClickListener { onClickLogin() }
     }
@@ -27,7 +27,7 @@ class MainActivity : DebugActivity() {
         val valorUsuario = campoUsuario.text.toString()
         val valorSenha = campoSenha.text.toString()
         if(valorUsuario.equals("aluno")  && valorSenha.equals("1234") ){
-            intent.putExtra("result", getString(R.string.login_OK))
+            intent.putExtra("result", getString(R.string.mensagem_login))
             val intent = Intent(context, TelaInicialActivity::class.java)
             val params = Bundle()
             params.putString("nome", "wagner")
@@ -35,7 +35,7 @@ class MainActivity : DebugActivity() {
             intent.putExtras(params)
             startActivityForResult(intent, 1)
         }else {
-            Toast.makeText(context, R.string.login_ERR, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.mensagem_login, Toast.LENGTH_LONG).show()
         }
 //        val intent = Intent(context, TelaInicialActivity::class.java)
 

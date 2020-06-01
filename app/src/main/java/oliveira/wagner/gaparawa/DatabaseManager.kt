@@ -4,16 +4,16 @@ import androidx.room.Room
 
 object DatabaseManager {
 
-    private var dbInstace: ProdutosDatabase
+    private var dbInstace: GaparawaDatabase
 
     init{
-        val appContext = ProdutosAplication.getInstance().applicationContext
+        val appContext = GaparawaApplication.getInstance().applicationContext
         dbInstace = Room.databaseBuilder(
-            appContext, ProdutosDatabase::class.java, "gprw.sqlite"
+            appContext, GaparawaDatabase::class.java, "gprw.sqlite"
         ).build()
     }
 
-    fun getProdutosDAO(): ProdutosDAO {
-        return dbInstace.produtosDAO()
+    fun getProdutoDAO(): ProdutoDAO {
+        return dbInstace.produtoDAO()
     }
 }
