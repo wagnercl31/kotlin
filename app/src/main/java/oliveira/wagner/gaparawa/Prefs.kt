@@ -3,7 +3,7 @@ package oliveira.wagner.gaparawa
 import android.content.SharedPreferences
 
 object Prefs {
-    val PREF_ID = "LMS"
+    val PREF_ID = "LWS"
 
     // retorna o armazém de preferências PREF_ID
     private fun prefs(): SharedPreferences {

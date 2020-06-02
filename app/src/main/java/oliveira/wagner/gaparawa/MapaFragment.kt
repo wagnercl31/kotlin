@@ -43,7 +43,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
 
         // criar um objeto de latitude e longitude
-        val location =LatLng(-23.550227, -46.633911)
+        val location =LatLng(-23.538705, -46.650979)
 
         // posicionar o mapa na coordenada criada, com um valor de zoom
         val update = CameraUpdateFactory.newLatLngZoom(location, 18f)
@@ -51,8 +51,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
         // colocar um marcado no local selecionado
         map?.addMarker(MarkerOptions()
-            .title("FIT")
-            .snippet("Faculdade Impacta de Tecnologia")
+            .title("Quitanda")
+            .snippet("Belissima Quitanda")
             .position(location)
         )
         // tipo do papa

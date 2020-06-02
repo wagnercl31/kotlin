@@ -16,8 +16,7 @@ class ProdutoCadastroActivity : AppCompatActivity() {
         salvarProduto.setOnClickListener {
             val produto = Produto()
             produto.nome = nomeProduto.text.toString()
-            produto.ementa = ementaProduto.text.toString()
-            produto.professor = professorProduto.text.toString()
+            produto.categoria = categoriaProduto.text.toString()
             produto.foto = urlFoto.text.toString()
 
             taskAtualizar(produto)

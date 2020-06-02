@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 object ProdutoService {
 
     val host = "https://rafaelsdlima.pythonanywhere.com"
-    val TAG = "WS_LMSApp"
+    val TAG = "WS_Gaparawa"
 
     fun getProdutos(context: Context): List<Produto> {
         var produtos: ArrayList<Produto>
@@ -18,7 +18,7 @@ object ProdutoService {
             produtos = parserJson(json)
             // salvar offline
             for (a in produtos) {
-                saveOffline(a)
+                                                                                                                                                                                                                                                                                                                                                            saveOffline(a)
             }
             Log.d(TAG, json)
             return produtos
@@ -58,7 +58,7 @@ object ProdutoService {
     private fun saveOffline(produto: Produto): Boolean {
         val dao = DatabaseManager.getProdutoDAO()
 
-        if (!existeProdutos(produto)) {
+        if (! existeProdutos(produto)) {
             dao.insert(produto)
         }
 

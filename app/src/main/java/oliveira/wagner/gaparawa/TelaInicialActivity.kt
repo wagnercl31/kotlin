@@ -59,16 +59,26 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         Thread {
             this.produtos = ProdutoService.getProdutos(context)
             runOnUiThread {
-                recycleProdutos?.adapter = ProdutoAdapter(produtos) { onclickProduto(it) }
+                recycleProdutos?.adapter = ProdutoAdapter(produtos) { onClickProduto(it) }
+                enviarNotificacao(this.produtos.get(0))
             }
 
         }.start()
     }
+    fun enviarNotificacao(produto: Produto) {
+        // Intent para abrir tela quando clicar na notificação
+        val intent = Intent(this, ProdutoActivity::class.java)
+        // parâmetros extras
+        intent.putExtra("produto", produto)
+        // Disparar notificação
+        NotificationUtil.create(this, 1, intent, "Gaparawa", "Você tem nova atividade na ${produto.nome}")
+    }
 
-    fun onclickProduto(produto: Produto) {
+    fun onClickProduto(produto: Produto) {
+        Toast.makeText(context, "Clicou produto ${produto.nome}", Toast.LENGTH_SHORT).show()
         val intent = Intent(context, ProdutoActivity::class.java)
         intent.putExtra("produto", produto)
-        startActivity(intent)
+        startActivityForResult(intent, REQUEST_REMOVE)
     }
 
     fun onClickLogout(){

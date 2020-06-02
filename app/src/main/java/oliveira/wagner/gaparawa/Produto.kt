@@ -11,10 +11,9 @@ class Produto : Serializable {
 
     @PrimaryKey
     var id:Long = 0
-    var nome:String = ""
-    var ementa:String = ""
-    var professor:String = ""
-    var foto:String = ""
+    var nome = ""
+    var categoria = ""
+    var foto = ""
 
     override fun toString(): String {
         return "Produto(nome='$nome')"

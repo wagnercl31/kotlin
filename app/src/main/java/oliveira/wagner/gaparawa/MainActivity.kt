@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.login.*
@@ -49,5 +50,29 @@ class MainActivity : DebugActivity() {
             val result = data?.getStringExtra("result")
             Toast.makeText(context, "$result", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // abrir a disciplina caso clique na notificação com o aplicativo fechado
+        abrirProduto()
+        // mostrar no log o tokem do firebase
+        Log.d("firebase", "Firebase Token: ${Prefs.getString("FB_TOKEN")}")
+    }
+
+    fun abrirProduto() {
+        // verificar se existe  id da disciplina na intent
+        if (intent.hasExtra("produtoId")) {
+            Thread {
+                var produtoId = intent.getStringExtra("produtoId")?.toLong()!!
+                val produto = ProdutoService.getProduto(this, produtoId)
+                runOnUiThread {
+                    val intentProduto = Intent(this, ProdutoActivity::class.java)
+                    intentProduto.putExtra("produto", produto)
+                    startActivity(intentProduto)
+                }
+            }.start()
+        }
+
     }
 }

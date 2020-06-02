@@ -17,19 +17,11 @@
         android:inputType="textPersonName"/>
 
     <EditText
-        android:id="@+id/ementaProduto"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:ems="10"
-        android:hint="Ementa"
-        android:inputType="textMultiLine" />
-
-    <EditText
-        android:id="@+id/professorProduto"
+        android:id="@+id/categoriaProduto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Professor"
+        android:hint="Categoria"
         android:inputType="textPersonName" />
 
     <EditText
