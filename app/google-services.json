@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "541589374184",
+    "firebase_url": "https://gaparawa.firebaseio.com",
+    "project_id": "gaparawa",
+    "storage_bucket": "gaparawa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541589374184:android:b913f305a628d2c8c1355d",
+        "android_client_info": {
+          "package_name": "oliveira.wagner.gaparawa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541589374184-ps19aoh5sff2v9n7mssvpccb33btvss7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8mREd8VWSZkEFYyAtHtwOPRgokUeIxmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541589374184-ps19aoh5sff2v9n7mssvpccb33btvss7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

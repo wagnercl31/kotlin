@@ -1,13 +1,16 @@
 <resources>
-    <string name="app_name">gaparawa</string>
-    <string name="str_msg_login">Faça aqui seu acesso</string>
-    <string name="login">Login</string>
-    <string name="passwd">Senha</string>
-    <string name="enter">Entrar</string>
+    <string name="app_name">Gaparawa</string>
+    <string name="mensagem_login">Faça seu Login</string>
 
-    <string name="login_OK">Logado</string>
-    <string name="login_ERR">Sem autorização</string>
-    <string name="nav_open">Abrir</string>
-    <string name="nav_close">Fechar</string>
+    <string name="action_buscar">Buscar</string>
+    <string name="action_atualizar">Atualizar</string>
+    <string name="action_adicionar">Adicionar</string>
+    <string name="action_config">Configurações</string>
+    <string name="action_remover">Remover</string>
 
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <!-- KEY para Maps API-->
+    <string name="API_KEY">AIzaSyD_ZWzh8SUu_LYvjaH8wxq37EZGfBbBI3M</string>
 </resources>

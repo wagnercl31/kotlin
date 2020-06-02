@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,15 +13,16 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.activity_tela_inicial.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val context: Context get() = this
-    private var produtos = listOf<Produtos>()
+    private var produtos = listOf<Produto>()
 
+    private var REQUEST_CADASTRO = 1
+    private var REQUEST_REMOVE= 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,7 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
     fun taskProdutos() {
         Thread {
-            this.produtos = ProdutosService.getProdutos(context)
+            this.produtos = ProdutoService.getProdutos(context)
             runOnUiThread {
                 recycleProdutos?.adapter = ProdutoAdapter(produtos) { onclickProduto(it) }
             }
@@ -65,8 +65,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         }.start()
     }
 
-    fun onclickProduto(produto: Produtos) {
-        val intent = Intent(context, ProdutosActivity::class.java)
+    fun onclickProduto(produto: Produto) {
+        val intent = Intent(context, ProdutoActivity::class.java)
         intent.putExtra("produto", produto)
         startActivity(intent)
     }
@@ -100,18 +100,23 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         // id do item clicado
         val id = item?.itemId
-        //verifica o item clicado e mostra a msg toast na tela
-        if (id == R.id.action_buscar) {
+        // verificar qual item foi clicado e mostrar a mensagem Toast na tela
+        // a comparação é feita com o recurso de id definido no xml
+        if  (id == R.id.action_buscar) {
             Toast.makeText(context, "Botão de buscar", Toast.LENGTH_LONG).show()
         } else if (id == R.id.action_atualizar) {
             Toast.makeText(context, "Botão de atualizar", Toast.LENGTH_LONG).show()
         } else if (id == R.id.action_config) {
-            Toast.makeText(context, "Botão de configurações", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Botão de configuracoes", Toast.LENGTH_LONG).show()
+        } else if (id == R.id.action_adicionar) {
+            // iniciar activity de cadastro
+            val intent = Intent(context, ProdutoCadastroActivity::class.java)
+            startActivityForResult(intent, REQUEST_CADASTRO)
         }
+        // botão up navigation
         else if (id == android.R.id.home) {
             finish()
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -120,8 +125,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         var toogle = ActionBarDrawerToggle(this,
             layoutMenuLateral,
             toolbar,
-            R.string.nav_open,
-            R.string.nav_close)
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close)
         layoutMenuLateral.addDrawerListener(toogle)
         toogle.syncState()
 
@@ -138,7 +143,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
                 Toast.makeText(this, "clicou em carrinho", Toast.LENGTH_SHORT).show()
             }
             R.id.nav_localizacao -> {
-                Toast.makeText(this, "clicou em localização", Toast.LENGTH_SHORT).show()
+                var intent = Intent(this, MapasActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_config -> {
                 Toast.makeText(this, "clicou em config", Toast.LENGTH_SHORT).show()
